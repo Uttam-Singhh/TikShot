@@ -66,7 +66,7 @@ export function useGame() {
 
     const load = async () => {
       try {
-        const data = await program.account.game.fetch(gamePDA);
+        const data = await (program.account as any).game.fetch(gamePDA);
         setGame(data as any);
       } catch {
         setGame(null);
@@ -104,7 +104,7 @@ export function useRound(roundId: number | null) {
       } catch {
         try {
           // Fallback to base layer
-          const data = await program.account.round.fetch(roundPDA);
+          const data = await (program.account as any).round.fetch(roundPDA);
           setRound(data as any);
         } catch {
           setRound(null);
@@ -163,7 +163,7 @@ export function usePlayer() {
       } catch {
         try {
           // Fallback to base layer
-          const data = await program.account.player.fetch(playerPDA);
+          const data = await (program.account as any).player.fetch(playerPDA);
           setPlayer(data as any);
         } catch {
           setPlayer(null);
@@ -280,7 +280,7 @@ export function useSettledRounds(
       const results = await Promise.allSettled(
         ids.map(async (id) => {
           const roundPDA = getRoundPDA(id);
-          const data = await program.account.round.fetch(roundPDA);
+          const data = await (program.account as any).round.fetch(roundPDA);
           return { id, data: data as any as RoundAccount };
         })
       );
