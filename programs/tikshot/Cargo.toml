@@ -1,0 +1,22 @@
+[package]
+name = "tikshot"
+version = "0.1.0"
+description = "TikShot - 10-second parimutuel betting on SOL/USD direction"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "tikshot"
+
+[features]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+default = []
+idl-build = ["anchor-lang/idl-build"]
+
+[dependencies]
+anchor-lang = { version = "0.32.0", features = ["init-if-needed"] }
+ephemeral-rollups-sdk = { version = "0.6.6", features = ["anchor", "disable-realloc"] }
+pyth-solana-receiver-sdk = "1.1"

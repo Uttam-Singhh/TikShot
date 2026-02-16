@@ -1,0 +1,220 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground: #e0e0e0;
+  --background: #0a0a1a;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+}
+
+/* ── Glassmorphism ── */
+.glass {
+  background: rgba(26, 26, 46, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(153, 69, 255, 0.12);
+}
+
+.glass-surface {
+  background: rgba(22, 33, 62, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ── Gradient border ── */
+.gradient-border {
+  position: relative;
+  border: none;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #9945FF, #14F195);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* ── Gradient text ── */
+.sol-text {
+  background: linear-gradient(135deg, #9945FF, #14F195);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Claim shimmer ── */
+.claim-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.claim-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: claimSweep 2.5s ease-in-out infinite;
+}
+@keyframes claimSweep {
+  0% { left: -100%; }
+  50% { left: 150%; }
+  100% { left: 150%; }
+}
+
+/* ── Button ripple ── */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+.ripple-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(0);
+  animation: rippleOut 0.6s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes rippleOut {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* ── Confetti ── */
+@keyframes confettiDrop {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(300px) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* ── Floating particles ── */
+@keyframes particleFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.15;
+  }
+  25% {
+    transform: translate(30px, -40px) scale(1.1);
+    opacity: 0.25;
+  }
+  50% {
+    transform: translate(-20px, -80px) scale(0.9);
+    opacity: 0.1;
+  }
+  75% {
+    transform: translate(40px, -30px) scale(1.05);
+    opacity: 0.2;
+  }
+}
+
+/* ── Wallet adapter overrides ── */
+.wallet-adapter-button {
+  background: linear-gradient(135deg, #9945FF, #14F195) !important;
+  transition: box-shadow 0.2s ease, transform 0.15s ease !important;
+}
+.wallet-adapter-button:hover {
+  box-shadow: 0 0 20px rgba(153, 69, 255, 0.4) !important;
+  transform: translateY(-1px) !important;
+}
+.wallet-adapter-button:active {
+  transform: scale(0.97) !important;
+}
+
+/* ── Pool bar inner glow ── */
+.pool-bar-up {
+  box-shadow: inset 0 0 10px rgba(34, 197, 94, 0.3);
+}
+.pool-bar-down {
+  box-shadow: inset 0 0 10px rgba(239, 68, 68, 0.3);
+}
+
+/* ── CSS Spinner ── */
+.css-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Chart ping (current-price dot pulse) ── */
+@keyframes chartPing {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+.chart-ping {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: chartPing 1.5s ease-out infinite;
+}
+
+/* ── Hide number input arrows ── */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* ── Locked ring pulse ── */
+@keyframes lockedPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+.locked-pulse {
+  animation: lockedPulse 2s ease-in-out infinite;
+}
+
+/* ── Bet success toast ── */
+@keyframes betSuccessIn {
+  0% { transform: translateY(-10px); opacity: 0; }
+  15% { transform: translateY(0); opacity: 1; }
+  85% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-10px); opacity: 0; }
+}
+.bet-success-toast {
+  animation: betSuccessIn 2.5s ease forwards;
+}
+
+/* ── Settlement edge flash ── */
+@keyframes edgeFlash {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.animate-edge-flash {
+  animation: edgeFlash 0.8s ease-out forwards;
+}
