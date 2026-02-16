@@ -1,5 +1,7 @@
 # TikShot
 
+> **[Live App](https://tikshot-eight.vercel.app)**
+
 Parimutuel betting game on SOL/USD price direction with 2-minute rounds. Built on Solana with [MagicBlock Ephemeral Rollups](https://www.magicblock.gg/) for high-throughput betting and [Pyth Network](https://pyth.network/) for real-time price feeds.
 
 ## How It Works
