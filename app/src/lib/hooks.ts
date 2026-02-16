@@ -99,7 +99,7 @@ export function useRound(roundId: number | null) {
     const poll = async () => {
       try {
         // Try ER first (for live updates during open round)
-        const data = await (erProgram || program).account.round.fetch(roundPDA);
+        const data = await ((erProgram || program).account as any).round.fetch(roundPDA);
         setRound(data as any);
       } catch {
         try {
@@ -158,7 +158,7 @@ export function usePlayer() {
 
       try {
         // Try ER first (has latest credits during active round)
-        const data = await (erProgram || program).account.player.fetch(playerPDA);
+        const data = await ((erProgram || program).account as any).player.fetch(playerPDA);
         setPlayer(data as any);
       } catch {
         try {
