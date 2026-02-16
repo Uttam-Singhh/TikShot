@@ -143,7 +143,7 @@ export function usePlayer() {
       if (!prev) return prev;
       const current = BigInt(prev.credits as any);
       const newCredits = current - BigInt(amount);
-      return { ...prev, credits: newCredits < 0n ? 0n : newCredits };
+      return { ...prev, credits: newCredits < BigInt(0) ? BigInt(0) : newCredits };
     });
   }, []);
 
